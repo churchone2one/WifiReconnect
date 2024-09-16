@@ -15,7 +15,7 @@ You can run this tool in two ways: as a pre-built .exe file or as a PowerShell s
 ### Option 1: Using the .exe Version
 
 1. **Create a folder** for the tool, e.g., `C:\apps\WifiReconnect\`.
-2. **Copy the executable** `wifi-reconnect.exe` into this folder.
+2. **Copy the executable** `wifi-reconnect-x64.exe` (or `wifi-reconnect-x32.exe`) into this folder.
 3. **Copy the configuration file** `config-sample.ini` and rename it to `config.ini`.
 4. **Edit** `config.ini` **file** to update the Wi-Fi SSID. (Make sure Windows has already authenticated to the network.)
 Set the tool to run at startup using your preferred method (e.g., Task Scheduler, Startup folder).
