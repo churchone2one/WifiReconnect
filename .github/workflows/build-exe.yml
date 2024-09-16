@@ -16,14 +16,22 @@ jobs:
         run: |
            Set-PSRepository PSGallery -InstallationPolicy Trusted
            Install-Module -Name PS2EXE -ErrorAction Stop      
-      - name: Build with ps2exe
+      - name: Build with ps2exe (x86)
         shell: powershell
-        run: Invoke-PS2EXE wifi-reconnect.ps1 wifi-reconnect.exe -NoConsole -Verbose -noOutput
+        run: Invoke-PS2EXE wifi-reconnect.ps1 wifi-reconnect-x86.exe -NoConsole -Verbose -noOutput -x86
       - name: Upload build results
         uses: actions/upload-artifact@v4
         with:
           name: wifi-reconnect-build
-          path: wifi-reconnect.exe
+          path: wifi-reconnect-x86.exe
+      - name: Build with ps2exe (x64)
+        shell: powershell
+        run: Invoke-PS2EXE wifi-reconnect.ps1 wifi-reconnect-x86.exe -NoConsole -Verbose -noOutput -x64
+      - name: Upload build results
+        uses: actions/upload-artifact@v4
+        with:
+          name: wifi-reconnect-build
+          path: wifi-reconnect-x64.exe
       # Commit and push all changed files.
       - name: GIT Commit Build Artifacts (exe)
         # Only run on main branch push (e.g. after pull request merge).
@@ -31,6 +39,7 @@ jobs:
         run: |
           git config --global user.name "${{ env.CI_COMMIT_AUTHOR }}"
           git config --global user.email "username@users.noreply.github.com"
-          git add wifi-reconnect.exe
+          git add wifi-reconnect-x86.exe
+          git add wifi-reconnect-x64.exe
           git commit -a -m "${{ env.CI_COMMIT_MESSAGE }}"
           git push          
