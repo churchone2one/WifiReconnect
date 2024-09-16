@@ -26,7 +26,7 @@ jobs:
           path: wifi-reconnect-x86.exe
       - name: Build with ps2exe (x64)
         shell: powershell
-        run: Invoke-PS2EXE wifi-reconnect.ps1 wifi-reconnect-x86.exe -NoConsole -Verbose -noOutput -x64
+        run: Invoke-PS2EXE wifi-reconnect.ps1 wifi-reconnect-x64.exe -NoConsole -Verbose -noOutput -x64
       - name: Upload build results
         uses: actions/upload-artifact@v4
         with:
