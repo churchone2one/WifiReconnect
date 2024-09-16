@@ -1,0 +1,23 @@
+name: Build
+
+on: [push]
+
+jobs:
+  build-ps2exe:
+    name: Build with ps2exe and upload
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install ps2exe module
+        shell: powershell
+        run: |
+           Set-PSRepository PSGallery -InstallationPolicy Trusted
+           Install-Module -Name PS2EXE -ErrorAction Stop      
+      - name: Build with ps2exe
+        shell: powershell
+        run: Invoke-PS2EXE wifi-reconnect.ps1 wifi-reconnect.exe -NoConsole -Verbose -noOutput
+      - name: Upload build results
+        uses: actions/upload-artifact@v4
+        with:
+          name: wifi-reconnect-build
+          path: wifi-reconnect.exe
